@@ -205,6 +205,16 @@ function pgrep($name) {
         Get-Process $name
 }
 
+# go to a directory even in path is a file.
+# added 02-nov-2022
+function gotodir($dir) {
+	if ((get-item $dir -erroraction silentlycontinue ) -is [system.io.directoryinfo]) {
+		cd $dir
+	} else {
+		cd (split-path -path $dir)
+	}
+}
+set-alias -name gd -value gotodir
 
 ## Final Line to set prompt
 oh-my-posh --init --shell pwsh --config ~/jandedobbeleer.omp.json | Invoke-Expression
