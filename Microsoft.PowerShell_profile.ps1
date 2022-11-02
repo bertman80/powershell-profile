@@ -130,6 +130,7 @@ Function Test-CommandExists
 #
 # Aliases
 #
+$EDITOR="notepad.exe"
 if (Test-CommandExists nvim) {
     $EDITOR='nvim'
 } elseif (Test-CommandExists pvim) {
