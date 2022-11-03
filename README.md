@@ -1,4 +1,4 @@
-# powershell-profile
+# Powershell Profile
 Pretty PowerShell that looks good and functions almost as good as Linux terminal 
 
 ## One Line Install (Elevated PowerShell Recommended)
