@@ -81,16 +81,14 @@ function dirs
 # Simple function to start a new elevated process. If arguments are supplied then 
 # a single command is started with admin rights; if not then a new admin instance
 # of PowerShell is started.
-function admin
-{
-    if ($args.Count -gt 0)
-    {   
+function admin {
+	# get current process and start this as admin.
+	$pwshell = [system.diagnostics.process]::getcurrentprocess().processname
+    if ($args.Count -gt 0) {   
        $argList = "& '" + $args + "'"
-       Start-Process "$psHome\powershell.exe" -Verb runAs -ArgumentList $argList
-    }
-    else
-    {
-       Start-Process "$psHome\powershell.exe" -Verb runAs
+       Start-Process $pwshell -Verb runAs -ArgumentList $argList
+    } else {
+       Start-Process $pwshell -Verb runAs
     }
 }
 
