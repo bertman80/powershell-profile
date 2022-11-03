@@ -206,7 +206,7 @@ function pgrep($name) {
         Get-Process $name
 }
 
-# go to a directory even in path is a file.
+# go to a directory even if path is a file.
 # added 02-nov-2022
 function gotodir($dir) {
 	if ((get-item $dir -erroraction silentlycontinue ) -is [system.io.directoryinfo]) {
