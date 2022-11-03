@@ -10,9 +10,9 @@
 # }
  # If the file already exists, show the message and do nothing.
 # else {
-		 Get-Item -Path $PROFILE | Move-Item -Destination oldprofile.ps1
-		 Invoke-RestMethod https://github.com/ChrisTitusTech/powershell-profile/raw/main/Microsoft.PowerShell_profile.ps1 -o $PROFILE
-		 Write-Host "The profile @ [$PROFILE] has been created and old profile removed."
+#		 Get-Item -Path $PROFILE | Move-Item -Destination oldprofile.ps1
+#		 Invoke-RestMethod https://github.com/ChrisTitusTech/powershell-profile/raw/main/Microsoft.PowerShell_profile.ps1 -o $PROFILE
+#		 Write-Host "The profile @ [$PROFILE] has been created and old profile removed."
 # }
 #& $profile
 
