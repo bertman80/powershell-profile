@@ -2,7 +2,7 @@
 Pretty PowerShell that looks good and functions almost as good as Linux terminal 
 
 ## Favo editor
-set path to your favorite editor
+set path to your favorite editor<br>
 $editor="c:\program files\notepad++\notepad++.exe"
 
 ## One Line Install (Elevated PowerShell Recommended)
