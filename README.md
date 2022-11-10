@@ -1,6 +1,10 @@
 # Powershell Profile
 Pretty PowerShell that looks good and functions almost as good as Linux terminal 
 
+## Favo editor
+set path to your favorite editor
+$editor="c:\program files\notepad++\notepad++.exe"
+
 ## One Line Install (Elevated PowerShell Recommended)
 
 ```
@@ -19,3 +23,27 @@ This script will copy the file with the latest writetime to the other profile.
 01-nov-2022: added gotodir function <br>
 03-nov-2022: improve admin function <br>
 
+# Custom profile functions:
+* System
+```
+df              : get disk volumes
+get-pubip       : get public ip
+pgrep           : find a process
+pkill           : kill a process
+```
+* Files and Directories
+```
+dirs            : show all directories and subdirectories (recursive)
+edit            : start the preferred editor
+find-file       : find file in current directory and subdirectories (recursive)
+gotodir (gd)    : go to a directory even if the path has a file name
+grep            : find files by filename and content in current directory and subdirectories (recursive)
+ll              : show all files in current directory
+touch           : create empty file
+unzip           : extract zip in current directory
+```
+* General
+```
+admin (sudo,su)         : start powershell in admin mode
+test-commandexists      : test if a command exists
+```
