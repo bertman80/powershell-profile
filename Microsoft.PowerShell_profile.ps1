@@ -213,19 +213,6 @@ if ($isAdmin) {
     $Host.UI.RawUI.WindowTitle += " [ADMIN]"
 }
 
-## Final Line to set prompt
-#oh-my-posh --init --shell pwsh --config ~/jandedobbeleer.omp.json | Invoke-Expression
-
-# Import the Chocolatey Profile that contains the necessary code to enable
-# tab-completions to function for `choco`.
-# Be aware that if you are missing these lines from your profile, tab completion
-# for `choco` will not function.
-# See https://ch0.co/tab-completion for details.
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
-}
-
 write-host "start '"  -nonewline -foregroundcolor white
 write-host "custom-functions" -nonewline -foregroundcolor green
 write-host "' to get a list of the custom options." -foregroundcolor white
