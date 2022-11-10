@@ -8,8 +8,7 @@ irm "https://github.com/bertman80/powershell-profile/raw/main/setup.ps1" | iex
 ```
 
 ## Fix the Missing Font
-
-extract the downloaded `cove.zip` that is in the folder you ran the script from and install the nerd fonts. 
+Extract the downloaded `cove.zip` that is in the folder you ran the script from and install the nerd fonts. 
 
 # Sync-profile:
 You can use sync-profile.ps1 to sync the microsoft.powershell_profile.ps1 between version 5 and version 7.<br>
