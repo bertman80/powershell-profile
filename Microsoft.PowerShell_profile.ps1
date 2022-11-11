@@ -1,18 +1,6 @@
 ### PowerShell template profile 
-### Version 1.03 - Tim Sneath <tim@sneath.org>
-### From https://gist.github.com/timsneath/19867b12eee7fd5af2ba
+### Version 1.1 - Bert Nieuwenampsen <bert@trebnie.nl>
 ###
-### This file should be stored in $PROFILE.CurrentUserAllHosts
-### If $PROFILE.CurrentUserAllHosts doesn't exist, you can make one with the following:
-###    PS> New-Item $PROFILE.CurrentUserAllHosts -ItemType File -Force
-### This will create the file and the containing subdirectory if it doesn't already 
-###
-### As a reminder, to enable unsigned script execution of local scripts on client Windows, 
-### you need to run this line (or similar) from an elevated PowerShell prompt:
-###   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
-### This is the default policy on Windows Server 2012 R2 and above for server Windows. For 
-### more information about execution policies, run Get-Help about_Execution_Policies.
-
 # ------------------------------ Variable ------------------------------
 # path to you favorite editing tool
 $editor="c:\program files\notepad++\notepad++.exe"
@@ -21,7 +9,6 @@ $editor="c:\program files\notepad++\notepad++.exe"
 $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
 $principal = New-Object Security.Principal.WindowsPrincipal $identity
 $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-
 
 # ------------------------------ Functions ------------------------------
 function custom-functions(){
@@ -63,10 +50,7 @@ function custom-functions(){
 	write-host ": start powershell in admin mode" -foregroundcolor green
 	write-host "test-commandexists $tab" -nonewline 
 	write-host ": test if a command exists" -foregroundcolor green
-
-
 }
-
 
 # If so and the current host is a command line, then change to red color 
 # as warning to user that they are operating in an elevated context
