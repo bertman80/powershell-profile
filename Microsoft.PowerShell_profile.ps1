@@ -32,7 +32,7 @@ function custom-functions(){
 	write-host ": show all directories and subdirectories (recursive)" -foregroundcolor green
 	write-host "edit $tab$tab" -nonewline 
 	write-host ": start the preferred editor" -foregroundcolor green
-	write-host "find-file $tab" -nonewline 
+	write-host "find-file (ff)$tab" -nonewline 
 	write-host ": find file in current directory and subdirectories (recursive)" -foregroundcolor green	
 	write-host "gotodir (gd) $tab" -nonewline 
 	write-host ": go to a directory even if the path has a file name" -foregroundcolor green
@@ -185,6 +185,7 @@ set-alias -name vim -value $editor
 set-alias -name edit -value $editor
 
 set-alias -name gd -value gotodir
+set-alias -name ff -value find-file
 
 # set unix-like aliases for the admin command, so sudo <command> will run the command a admin
 set-alias -name su -value admin
