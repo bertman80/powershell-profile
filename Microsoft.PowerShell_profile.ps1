@@ -152,7 +152,11 @@ function pkill($name) {
 }
 # find a process
 function pgrep($name) {
-        Get-Process $name
+	if ($name) {
+		Get-Process $name | sort name
+	} else {
+		Get-Process | sort name
+	}
 }
 
 # get public ip
