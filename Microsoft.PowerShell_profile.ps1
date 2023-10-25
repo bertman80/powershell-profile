@@ -1,5 +1,5 @@
 ### PowerShell template profile 
-### Version 1.1 - Bert Nieuwenampsen <bert@trebnie.nl>
+### Version 1.3 - Bert Nieuwenampsen <bert@trebnie.nl>
 ###
 # ------------------------------ Variable ------------------------------
 # path to you favorite editing tool
@@ -43,6 +43,8 @@ function custom-functions(){
 	write-host "touch $tab$tab" -nonewline 
 	write-host ": create empty file" -foregroundcolor green
 	write-host "unzip $tab$tab" -nonewline 
+	write-host ": compress file or dir in current directory" -foregroundcolor green
+	write-host "unzip $tab$tab" -nonewline 
 	write-host ": extract zip in current directory" -foregroundcolor green
 
 	write-host "* General" -foregroundcolor yellow
@@ -50,6 +52,8 @@ function custom-functions(){
 	write-host ": start powershell in admin mode" -foregroundcolor green
 	write-host "test-commandexists $tab" -nonewline 
 	write-host ": test if a command exists" -foregroundcolor green
+	write-host "sync $tab$tab$tab" -nonewline 
+	write-host ": sync this profile ps1 based on modification date to other versions" -foregroundcolor green
 }
 
 # If so and the current host is a command line, then change to red color 
@@ -114,6 +118,49 @@ function unzip ($file) {
 	expand-archive -path $fullfile -destinationpath $pwd
 }
 
+# unzip in current dir
+function zip ($source) {
+	# 2do parm
+	if ((get-item $source).psiscontainer) {
+		write-host "it's a folder"
+		$source = ((get-item -path $source).fullname).trimend('\')
+	} else {
+		write-host "it's a file"
+		$source = (get-item $source).fullname
+	}
+	$target = $source
+	$targetpath = (split-path -parent $source)
+	$answer = $false
+	if (test-path "$source.zip") {
+		write-host "allready exist: $source.zip"
+		write-host "option: (r)ename, (o)verwrite, (t)imestamp"
+		$answer = read-host "what do you want to do"
+		if (($answer -ne "r") -and ($answer -ne "o") -and ($answer -ne "t")) {
+			write-host "no choice made, nothing done"
+			break
+		}
+	}
+
+	if ($answer -eq "r") {
+		write-host "rename"
+		$tmp = read-host "filename (excl zip)"
+		$target = "$targetpath\$tmp"
+	}
+	if ($answer -eq "t") {
+		write-host "add timestamp"
+		[string]$tmp = get-date -format "yyyymmdd-hhmm"
+		$target = "$source-$tmp"
+	}
+
+	if ($answer -eq "o") {
+		write-host "overwrite"
+		write-output("compress", $source, "to", "$target.zip")
+		compress-archive -path $source -destinationpath "$target.zip" -force
+	} else {
+		write-output("compress", $source, "to", "$target.zip")
+		compress-archive -path $source -destinationpath "$target.zip"
+	}
+}
 
 # starts current powershell version as admin
 function admin {
