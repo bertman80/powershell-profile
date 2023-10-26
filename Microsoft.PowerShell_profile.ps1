@@ -143,7 +143,8 @@ function zip ($source) {
 	write-host "Target directory: $zipdir"
 	write-host "Filename: $zipfile.zip"
 	
-	if (test-path $zipfile) {
+	$output = "$zipdir\$zipfile.zip"
+	if (test-path $output) {
 		write-host "File allready exist: $zipfile" -foregroundcolor yellow
 		write-host "Options: (r)ename, (o)verwrite, (t)imestamp"
 		$answer = read-host "Other options will stop this action"
@@ -165,7 +166,7 @@ function zip ($source) {
 		$zipfile = "$zipfile-$tmp.zip"
 	}
 
-	$output = "$zipdir\$zipfile"
+	$output = "$zipdir\$zipfile.zip"
 	try {
 		if ($answer -eq "o") {
 			write-host "Overwrite existing file: $source -> $output.zip"
