@@ -118,48 +118,73 @@ function unzip ($file) {
 	expand-archive -path $fullfile -destinationpath $pwd
 }
 
-# unzip in current dir
+
+# compressing (zip)
 function zip ($source) {
-	# 2do parm
-	if ((get-item $source).psiscontainer) {
-		write-host "it's a folder"
-		$source = ((get-item -path $source).fullname).trimend('\')
+	$retval = $false
+	write-host ""
+	write-host "------ Compressing (zip) ------"
+	# filename determination
+	$items = get-item $source
+	if ($items.count -gt 1) {
+		# multiple files, first file givens the name
+		write-host "Total items: $($items.count)"
+		$filename = $($items[0].fullname)
 	} else {
-		write-host "it's a file"
-		$source = (get-item $source).fullname
+		write-host "Total items: 1"
+		$filename = $($items.fullname)
 	}
-	$target = $source
-	$targetpath = (split-path -parent $source)
-	$answer = $false
-	if (test-path "$source.zip") {
-		write-host "allready exist: $source.zip"
-		write-host "option: (r)ename, (o)verwrite, (t)imestamp"
-		$answer = read-host "what do you want to do"
+	# write-host "Source: $filename"
+	
+	# $target = ((get-item -path $filename).fullname).trimend('\')
+	$target = ($filename).trimend('\')
+	$zipdir = split-path -parent "$target.zip"
+	$zipfile = ("$target").replace("$zipdir\","")
+		
+	write-host "Target directory: $zipdir"
+	write-host "Filename: $zipfile.zip"
+	
+	if (test-path $zipfile) {
+		write-host "File allready exist: $zipfile" -foregroundcolor yellow
+		write-host "Options: (r)ename, (o)verwrite, (t)imestamp"
+		$answer = read-host "Other options will stop this action"
 		if (($answer -ne "r") -and ($answer -ne "o") -and ($answer -ne "t")) {
-			write-host "no choice made, nothing done"
+			write-host "No choice made, nothing done"
+			write-host "-------------------------------"
 			break
 		}
 	}
 
 	if ($answer -eq "r") {
-		write-host "rename"
-		$tmp = read-host "filename (excl zip)"
-		$target = "$targetpath\$tmp"
+		$tmp = read-host "Filename (excl zip)"
+		write-host "Option: rename"
+		$zipfile = "$tmp.zip"
 	}
 	if ($answer -eq "t") {
-		write-host "add timestamp"
+		write-host "Option: add timestamp"
 		[string]$tmp = get-date -format "yyyymmdd-hhmm"
-		$target = "$source-$tmp"
+		$zipfile = "$zipfile-$tmp.zip"
 	}
 
-	if ($answer -eq "o") {
-		write-host "overwrite"
-		write-output("compress", $source, "to", "$target.zip")
-		compress-archive -path $source -destinationpath "$target.zip" -force
-	} else {
-		write-output("compress", $source, "to", "$target.zip")
-		compress-archive -path $source -destinationpath "$target.zip"
+	$output = "$zipdir\$zipfile"
+	try {
+		if ($answer -eq "o") {
+			write-host "Overwrite existing file: $source -> $output.zip"
+			$tmp = compress-archive -path $source -destinationpath $output -force -erroraction stop
+			$retval = $true
+		} else {
+			write-host "Compressing: $source -> $output.zip"
+			$tmp = compress-archive -path $source -destinationpath $output -erroraction stop
+			$retval = $true
+		}
 	}
+	catch {
+		$tmp = $error[0].exception.message
+		write-host "Zip file not created" -foregroundcolor yellow
+		write-host $tmp -foregroundcolor white
+	}
+	write-host "-------------------------------"
+	return $retval
 }
 
 # starts current powershell version as admin
