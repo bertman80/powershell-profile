@@ -121,7 +121,6 @@ function unzip ($file) {
 
 # compressing (zip)
 function zip ($source) {
-	$retval = $false
 	write-host ""
 	write-host "------ Compressing (zip) ------"
 	# filename determination
@@ -171,11 +170,9 @@ function zip ($source) {
 		if ($answer -eq "o") {
 			write-host "Overwrite existing file: $source -> $output.zip"
 			$tmp = compress-archive -path $source -destinationpath $output -force -erroraction stop
-			$retval = $true
 		} else {
 			write-host "Compressing: $source -> $output.zip"
 			$tmp = compress-archive -path $source -destinationpath $output -erroraction stop
-			$retval = $true
 		}
 	}
 	catch {
@@ -184,7 +181,6 @@ function zip ($source) {
 		write-host $tmp -foregroundcolor white
 	}
 	write-host "-------------------------------"
-	return $retval
 }
 
 # starts current powershell version as admin
