@@ -20,8 +20,9 @@ This script will copy the file with the latest writetime to the other profile.
 
 
 # Last updates:
-01-nov-2022: added gotodir function <br>
+27-oct-2023: improve zip function <br>
 03-nov-2022: improve admin function <br>
+01-nov-2022: added gotodir function <br>
 
 # Custom profile functions:
 * System
