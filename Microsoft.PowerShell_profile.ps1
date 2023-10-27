@@ -42,7 +42,7 @@ function custom-functions(){
 	write-host ": show all files in current directory" -foregroundcolor green
 	write-host "touch $tab$tab" -nonewline 
 	write-host ": create empty file" -foregroundcolor green
-	write-host "unzip $tab$tab" -nonewline 
+	write-host "zip $tab$tab" -nonewline 
 	write-host ": compress file or dir in current directory" -foregroundcolor green
 	write-host "unzip $tab$tab" -nonewline 
 	write-host ": extract zip in current directory" -foregroundcolor green
