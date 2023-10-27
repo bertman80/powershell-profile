@@ -41,6 +41,7 @@ grep            : find files by filename and content in current directory and su
 ll              : show all files in current directory
 touch           : create empty file
 unzip           : extract zip in current directory
+zip             : compress files and folders
 ```
 * General
 ```
